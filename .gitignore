@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# --- tambahan proyek ---
+# .env* di atas menutup .env.local DAN backup-nya (.env.local.bak).
+# Template tanpa rahasia tetap boleh ikut supaya deploy mudah diulang.
+!.env.example
+
+# editor & OS
+.idea/
+Thumbs.db
