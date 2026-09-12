@@ -4,7 +4,7 @@ import { getProducts } from '@/lib/products/data';
 
 import { ProductCard } from './product-card';
 
-export const metadata = { title: 'Produk' };
+export const metadata = { title: 'Katalog' };
 
 export default async function ProductsPage() {
   const products = await getProducts();
@@ -12,7 +12,7 @@ export default async function ProductsPage() {
   return (
     <main className="mx-auto w-full max-w-5xl flex-1 p-6">
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">Produk</h1>
+        <h1 className="text-2xl font-semibold">Katalog</h1>
         <Link href="/cart" className="text-sm underline underline-offset-4">
           Keranjang
         </Link>
