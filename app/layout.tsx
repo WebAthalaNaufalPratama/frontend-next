@@ -3,6 +3,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "./site-header";
 
+// Semua halaman membaca cookie (sesi cart di SiteHeader) dan data toko harus
+// selalu segar — produk yang dibuat lewat wp-admin/Hermes langsung tampil.
+// Tanpa ini, Next mencoba membekukan /products saat build: build gagal kalau
+// WordPress tak terjangkau, dan katalog baru berubah setelah deploy ulang.
+export const dynamic = "force-dynamic";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

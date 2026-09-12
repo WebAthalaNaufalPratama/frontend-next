@@ -125,15 +125,15 @@ persisten, jadi harus di VPS atau hosting PHP.
 **1. Isi env var** di Vercel → Settings → Environment Variables. `.env.local`
 tidak ikut ter-upload.
 
-**2. Hapus `--use-system-ca` dari script `build` dan `start`.** Flag itu
-tambalan untuk sertifikat lokal Laravel Herd yang tidak dipercaya Node. Di
-Vercel flag ini tidak berguna dan berpotensi mengganggu `NODE_OPTIONS` bawaan:
+**2. Script `build`/`start` sudah bersih.** `--use-system-ca` hanya ada di
+`dev` — itu tambalan untuk sertifikat lokal Laravel Herd yang tidak dipercaya
+Node. Jangan tambahkan kembali ke `build`/`start`.
 
-```json
-"dev": "cross-env NODE_OPTIONS=--use-system-ca next dev",
-"build": "next build",
-"start": "next start",
-```
+**Semua route dirender dinamis** (`export const dynamic = "force-dynamic"` di
+`app/layout.tsx`). Alasannya dua: setiap halaman membaca cookie sesi cart lewat
+`SiteHeader`, dan katalog harus selalu segar — produk yang dibuat di wp-admin
+atau lewat Hermes langsung tampil tanpa deploy ulang. Efek sampingnya: build
+tidak pernah memanggil WordPress, jadi tidak gagal walau backend sedang mati.
 
 **3. Pastikan WordPress memakai HTTPS.** Halaman Vercel disajikan lewat HTTPS,
 jadi gambar dari `http://...` akan diblokir browser sebagai mixed content.
